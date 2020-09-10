@@ -1,4 +1,4 @@
-import categories from '../data/categories'
+import categories from '../data/scattergories/categories'
 
 export default function generateList () {
   let newList = []

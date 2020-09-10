@@ -9,7 +9,7 @@ export interface SubmittedAnswer {
   correct: boolean,
 }
 
-export default function Game () {
+export default function Scattergories () {
 
   // various states for the whole game
   const [list, setList] = React.useState<string[]>([])
