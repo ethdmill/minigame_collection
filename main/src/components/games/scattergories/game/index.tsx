@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import Home from '../../../home'
 import Game from './game'
 import AcceptableAnswers from '../rules/acceptableAnswers'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 
 export default function Scattergories() {
 
