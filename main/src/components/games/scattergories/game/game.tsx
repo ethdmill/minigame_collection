@@ -11,7 +11,7 @@ export interface SubmittedAnswer {
 
 export default function Game () {
 
-  // various states for the whole game
+  // various states for the game
   const [list, setList] = React.useState<string[]>([])
   const [letter, setLetter] = React.useState<string>()
   const [connection, setConnection] = React.useState<typeof Socket>()
@@ -30,17 +30,17 @@ export default function Game () {
       const connection = socketio('/lobby')
       setConnection(connection)
 
-      //initializes list genration functionality
+      // initializes list genration
       connection.on('list_generated', (list: string[]) => {
         setList(list)
       })
 
-      // initializes random letter functionality
+      // initializes random letter
       connection.on('letter_generated', (letter: string) => {
         setLetter(letter)
       })
 
-      // initializes timer functionality
+      // initializes timer
       connection.on('timer_ended', () => {})
     },
     []

@@ -1,0 +1,11 @@
+.alphabet {
+  background: none;
+  border: none;
+  padding: 3px 5px;
+  font-family: "Roboto Mono", monospace;
+  cursor: pointer;
+}
+
+.alphabet-container {
+  max-width: 450px;
+}
