@@ -22,11 +22,11 @@ export default function Hangman() {
   const [attempts, setAttempts] = useState<number>(0)
   const [guessedLetters, setGuessedLetters] = useState<string[]>([])
   const [color, setColor] = useState<string[]>(defaultColor)
+  const [flavorText, setFlavorText] = useState<string>('')
   const [disableLetters, setDisableLetters] = useState<boolean>(true)
   const [disableGenerateWord, setDisableGenerateWord] = useState<boolean>()
   const [disableStart, setDisableStart] = useState<boolean>(true)
   const [disableGiveUp, setDisableGiveUp] = useState<boolean>(true)
-  const [flavorText, setFlavorText] = useState<string>('')
 
   // initializes lobby and connects to source files
   useEffect(
@@ -100,13 +100,13 @@ export default function Hangman() {
     let letter = e.currentTarget.getAttribute('value')!
     let id = parseInt(e.currentTarget.getAttribute('id')!)
     // checks to see if word includes guess, then acts accordingly
+    console.log(word)
     if (word.includes(letter)) {
       const newColor = [...color.slice(0, id), '#1E88E5', ...color.slice(id + 1)]
       setColor(newColor)
       for (let i = 0; i < word.length; i++) {
         if (word[i] === letter) {
-          const tempAnswer = [...dashes.slice(0, i), letter.toUpperCase(), ...dashes.slice(i + 1)]
-          setDashes(tempAnswer)
+          dashes[i] = letter.toUpperCase()
         }
       }
     } 
@@ -120,6 +120,7 @@ export default function Hangman() {
       guessedLetters.push(letter)
       setAttempts(attempts! - 1)
     }
+    console.log(guessedLetters)
   }
 
   // forces user to start new game on win or loss
@@ -133,7 +134,7 @@ export default function Hangman() {
     }
   }, [dashes, attempts])
 
-  // maybe make this its own component
+  // maps out array of clickable letters
   const alphabetArray = () => {
     let alphabet = Array.apply(null, Array(26)).map((_x, i) => 
       <button 
@@ -155,7 +156,7 @@ export default function Hangman() {
   useEffect(() => {
     if (attempts === 0 && dashes.includes('-')) {
       setFlavorText('Nice try! Play again?')
-    } else if (attempts === 0 && !dashes.includes('-')) {
+    } else if (!dashes.includes('-')) {
       setFlavorText('Nice job! Play again?')
     } else if(attempts <= 5 && attempts > 0) {
       setFlavorText('Be careful!')
