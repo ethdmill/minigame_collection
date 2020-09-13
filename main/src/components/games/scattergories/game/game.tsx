@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import socketio, { Socket } from 'socket.io-client'
 import Timer from './timer'
 import UserInputs from './userInputs'
@@ -12,20 +12,20 @@ export interface SubmittedAnswer {
 export default function Game () {
 
   // various states for the game
-  const [list, setList] = React.useState<string[]>([])
-  const [letter, setLetter] = React.useState<string>()
-  const [connection, setConnection] = React.useState<typeof Socket>()
-  const [timeRemaining, setTimeRemaining] = React.useState<number>(180)
-  const [disableInputs, setDisableInputs] = React.useState<boolean>(true)
-  const [disableStartButton, setDisableStartButton] = React.useState<boolean>(true)
-  const [disableGenerateButton, setDisableGenerateButton] = React.useState<boolean>(false)
+  const [list, setList] = useState<string[]>([])
+  const [letter, setLetter] = useState<string>()
+  const [connection, setConnection] = useState<typeof Socket>()
+  const [timeRemaining, setTimeRemaining] = useState<number>(180)
+  const [disableInputs, setDisableInputs] = useState<boolean>(true)
+  const [disableStartButton, setDisableStartButton] = useState<boolean>(true)
+  const [disableGenerateButton, setDisableGenerateButton] = useState<boolean>(false)
 
   // initial answer/point values and another default state
   const initialValues = Array.from({ length: 12 }).map(() => ({ userInput: "", correct: false })) as SubmittedAnswer[]
-  const [answers, setAnswers] = React.useState<SubmittedAnswer[]>(initialValues)
+  const [answers, setAnswers] = useState<SubmittedAnswer[]>(initialValues)
 
   // initializes lobby and connects to source files
-  React.useEffect(
+  useEffect(
     () => {
       const connection = socketio('/lobby')
       setConnection(connection)
@@ -47,7 +47,7 @@ export default function Game () {
   )
 
   // disables user inputs when timer reaches 0
-  React.useEffect(() => {
+  useEffect(() => {
     if (timeRemaining === 0) {
       setDisableInputs(true)
     }
@@ -68,13 +68,13 @@ export default function Game () {
   }
 
   // on button click -- generates a category list
-  const handleGenerateListClick = () =>{ 
+  const handleGenerateList = () =>{ 
     connection?.emit('generate_list')
     setDisableStartButton(false)
   }
 
   // on button click -- sets time remaining, starts timer, enables inputs, disables start/list/letter buttons
-  const handleStartClick = () => {
+  const handleStart = () => {
     connection?.emit('generate_letter')
     setTimeRemaining(5)
     countdownTimer(5)
@@ -109,10 +109,10 @@ export default function Game () {
     <div>
       <div className="d-flex flew-row justify-content-center pt-4 pb-1">
         <div className="px-3">
-          <button onClick={() => handleGenerateListClick()} disabled={disableGenerateButton}>Generate a list!</button>
+          <button onClick={() => handleGenerateList()} disabled={disableGenerateButton}>Get a list!</button>
         </div>
         <div className="px-3">
-          <button onClick={() => handleStartClick()} disabled={disableStartButton}>Start the game!</button>
+          <button onClick={() => handleStart()} disabled={disableStartButton}>Start the game!</button>
         </div>
       </div>
       <div className="d-flex flew-row justify-content-center py-2 info">
