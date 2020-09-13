@@ -9,8 +9,7 @@ export default function Hangman() {
   // various states for the game
   const [connection, setConnection] = useState<typeof Socket>()
   const [word, setWord] = useState<string[]>(["-"])
-  // ! const [previousWord, setPreviousWord] = useState<string[]>([])
-  const [recursion, setRecursion] = useState<boolean>(false)
+  // ! const [recursion, setRecursion] = useState<boolean>(false)
 
   // on word generation -- converts word to dashes
   const wordToDashes = (word: string[]) => {
@@ -36,17 +35,12 @@ export default function Hangman() {
 
       // initializes word generation
       connection.on('word_generated', (word: string[]) => {
-        // setWord(word)
-        recursion ? setWord(["r", "e", "c", "u", "r", "s", "i", "o", "n"]) : setWord(word)
+        setWord(word)
         console.log(word.length)
         console.log(word)
         setDashes(wordToDashes(word))
         attemptsRemaining(word)
         setDisableStart(false)
-        //fun little easter egg
-        // ! if (previousWord === ["r", "e", "c", "u", "r", "s", "i", "o", "n"]) {
-        //   setWord(previousWord)
-        // }
       })
     },
     []
@@ -64,12 +58,7 @@ export default function Hangman() {
 
   // generate word button handler
   const handleGenerateWord = () => {
-    // recursion ? setWord(["r", "e", "c", "u", "r", "s", "i", "o", "n"]) : connection?.emit('generate_word')
-    // if (recursion) {
-    //   setWord(["r", "e", "c", "u", "r", "s", "i", "o", "n"])
-    // } else {
-      connection?.emit('generate_word')
-    // }
+    connection?.emit('generate_word')
   }
 
   // start button handler
@@ -82,9 +71,6 @@ export default function Hangman() {
     setDisableGenerateWord(true)
     setDisableStart(true)
     setDisableGiveUp(false)
-    if (word === ["r", "e", "c", "u", "r", "s", "i", "o", "n"]) {
-      setRecursion(true)
-    }
   }
 
   // give up button handler
@@ -99,8 +85,7 @@ export default function Hangman() {
   const handleLetterClick = (e: React.MouseEvent<HTMLElement>) => {
     let letter = e.currentTarget.getAttribute('value')!
     let id = parseInt(e.currentTarget.getAttribute('id')!)
-    // checks to see if word includes guess, then acts accordingly
-    console.log(word)
+    // if word includes guess, then color changes and dashes are replaced
     if (word.includes(letter)) {
       const newColor = [...color.slice(0, id), '#1E88E5', ...color.slice(id + 1)]
       setColor(newColor)
@@ -110,6 +95,7 @@ export default function Hangman() {
         }
       }
     } 
+    // if not, then only color changes
     else {
       const newColor = [...color.slice(0, id), '#D81B6099', ...color.slice(id + 1)]
       setColor(newColor)
@@ -120,7 +106,6 @@ export default function Hangman() {
       guessedLetters.push(letter)
       setAttempts(attempts! - 1)
     }
-    console.log(guessedLetters)
   }
 
   // forces user to start new game on win or loss
@@ -130,7 +115,6 @@ export default function Hangman() {
       setDisableStart(true)
       setDisableLetters(true)
       setDisableGiveUp(true)
-      // ! setPreviousWord(word)
     }
   }, [dashes, attempts])
 

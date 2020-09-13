@@ -4,6 +4,15 @@ import Timer from './timer'
 import UserInputs from './userInputs'
 import './game.css'
 
+// TODO: set timer back to 3 minutes (maybe add settable timer?)
+// TODO: multiplayer functionality
+// TODO: scoreboard system
+// TODO: end-of-round individual answer reveal (multiplayer)
+// TODO: add more categories
+// TODO: addable/removable user inputs
+// TODO: adjustable/hideable timer (reappears when it hits 0? 5 seconds? 10 seconds?)
+
+
 export interface SubmittedAnswer {
   userInput: string,
   correct: boolean,
