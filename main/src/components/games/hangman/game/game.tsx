@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import socketio, { Socket } from 'socket.io-client'
 import './game.css'
 
+// TODO: add whole-word guess text input
+// TODO: figure out recursion thing
+// TODO: add start flavor text OR rip out the whole thing
+
 export default function Hangman() {
 
   const defaultColor = Array.apply(null, Array(26)).map((_x, _i) => '')
@@ -40,6 +44,7 @@ export default function Hangman() {
         console.log(word)
         setDashes(wordToDashes(word))
         attemptsRemaining(word)
+        setColor(defaultColor)
         setDisableStart(false)
       })
     },
@@ -65,7 +70,6 @@ export default function Hangman() {
   const handleStart = () => {
     setDashes(wordToDashes(word))
     setDisableLetters(false)
-    setColor(defaultColor)
     setGuessedLetters([])
     attemptsRemaining(word)
     setDisableGenerateWord(true)

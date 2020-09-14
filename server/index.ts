@@ -6,6 +6,7 @@ import generateList from './game_functions/scattergories/generateList';
 import Timer from './game_functions/scattergories/timer';
 import generateLetter from './game_functions/scattergories/randomLetter';
 import generateWord from './game_functions/hangman/generateWord'
+import generateQuestion from './game_functions/millionaire/generateQuestion'
 
 const expressServer = express();
 
@@ -40,6 +41,11 @@ lobbyIO.on('connection', (client) => {
   //hangman
   client.on('generate_word', () => {
     lobbyIO.emit('word_generated', generateWord())
+  })
+
+  // millionaire
+  client.on('generate_question', () => {
+    lobbyIO.emit('question_generated', generateQuestion())
   })
 
   client.on('disconnect', () => {

@@ -77,7 +77,7 @@ export default function Game () {
   }
 
   // on button click -- generates a category list
-  const handleGenerateList = () =>{ 
+  const handleGenerateList = () => { 
     connection?.emit('generate_list')
     setDisableStartButton(false)
   }

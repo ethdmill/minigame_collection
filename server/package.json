@@ -7,11 +7,13 @@
     },
     "proxy": "http://localhost:8080",
     "dependencies": {
+        "@types/node": "^14.6.1",
+        "@typescript-eslint/eslint-plugin": "^4.1.0",
+        "@typescript-eslint/parser": "^4.1.0",
         "express": "^4.17.1",
         "socket.io": "^2.3.0",
         "ts-node": "^8.10.2",
-        "typescript": "^3.9.7",
-        "@types/node": "^14.6.1"
+        "typescript": "^3.9.7"
     },
     "devDependencies": {
         "ts-node-dev": "^1.0.0-pre.57"
