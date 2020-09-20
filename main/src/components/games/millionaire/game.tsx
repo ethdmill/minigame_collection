@@ -23,7 +23,7 @@ export default function Millionaire() {
   // "start" button to begin game and "next" button to continue playing,
   // unless I decide to automatically present next question on correct answer after short timer
   const handleGenerateQuestion = () => {
-    connection?.emit('generate_question')
+    connection!.emit('generate_question')
   }
 
   return (

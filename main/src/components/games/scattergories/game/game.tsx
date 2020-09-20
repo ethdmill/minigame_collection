@@ -78,13 +78,13 @@ export default function Game () {
 
   // on button click -- generates a category list
   const handleGenerateList = () => { 
-    connection?.emit('generate_list')
+    connection!.emit('generate_list')
     setDisableStartButton(false)
   }
 
   // on button click -- sets time remaining, starts timer, enables inputs, disables start/list/letter buttons
   const handleStart = () => {
-    connection?.emit('generate_letter')
+    connection!.emit('generate_letter')
     setTimeRemaining(5)
     countdownTimer(5)
     setDisableInputs(false)
