@@ -13,7 +13,9 @@ import HangmanRules from './components/games/hangman/rules/rules'
 import HangmanRoadmap from './components/games/hangman/roadmap/roadmap'
 
 // these are temporary, but cheetos are forever
-import Millionaire from './components/games/millionaire/nothing'
+// TODO: update millionaire now that work has begun
+import Millionaire from './components/games/millionaire/game'
+
 import TailChase from './components/games/tail_chase/nothing'
 
 export default function App() {
