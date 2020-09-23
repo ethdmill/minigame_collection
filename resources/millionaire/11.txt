@@ -1,0 +1,24 @@
+  {
+    'prompt': '',
+    'pointValue': 0,
+    'answers': [
+      {
+        'text': '',
+        isCorrect: true
+      },
+      {
+        'text': '',
+        isCorrect: false
+      },
+      {
+        'text': '',
+        isCorrect: false
+      },
+      {
+        'text': '',
+        isCorrect: false
+      }
+    ]
+  },
+
+Who did Ringo Starr replace in The Beatles?

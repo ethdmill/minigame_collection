@@ -1,27 +1,61 @@
-const questions: {
-  question: string,
+interface Answer {
+  text: string,
+  isCorrect: boolean
+}
+
+interface Question {
+  prompt: string,
   pointValue: number,
-  correct: string,
-  incorrect1: string,
-  incorrect2: string,
-  incorrect3: string
-}[] = [
+  answers: Answer[]
+}
+
+const questions: Question[] = [
   {
-    'question': 'What tool do you use to hammer a nail?',
+    'prompt': 'What tool do you use to hammer a nail? (TEST QUESTION)',
     'pointValue': 1,
-    'correct': 'A hammer',
-    'incorrect1': 'A nail',
-    'incorrect2': 'A third option not mentioned in the show',
-    'incorrect3': 'These strings are longer than they should be'
-  },
-  {
-    'question': 'What is the main ingredient in candles?',
-    'pointValue': 1,
-    'correct': 'Oils and lipids',
-    'incorrect1': 'Flowers',
-    'incorrect2': 'Bee dust',
-    'incorrect3': 'Sumac'
-  },
+    'answers': [
+      {
+        'text': 'A hammer',
+        'isCorrect': true
+      },
+      {
+        'text': 'A nail',
+        'isCorrect': false
+      },
+      {
+        'text': 'A third option not mentioned in the show',
+        'isCorrect': false
+      },
+      {
+        'text': 'These strings are longer than they should be',
+        'isCorrect': false
+      }
+    ]
+  }, 
 ]
 
 export default questions
+
+// default question template
+// {
+//   'prompt': '',
+//   'pointValue': 0,
+//   'answers': [
+//     {
+//       'text': '',
+//       isCorrect: true
+//     },
+//     {
+//       'text': '',
+//       isCorrect: false
+//     },
+//     {
+//       'text': '',
+//       isCorrect: false
+//     },
+//     {
+//       'text': '',
+//       isCorrect: false
+//     }
+//   ]
+// },

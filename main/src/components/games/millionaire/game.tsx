@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import socketio, { Socket } from 'socket.io-client'
 
+interface Answer {
+  text: string,
+  isCorrect: boolean
+}
+
+interface Question {
+  prompt: string,
+  pointValue: number,
+  answers: Answer[]
+}
+
 export default function Millionaire() {
   const [connection, setConnection] = useState<typeof Socket>()
-  // const [question, setQuestion] = useState<[]>()
-  const [question, setQuestion] = useState<{}>({})
+  const [question, setQuestion] = useState<Question | null>(null)
 
   useEffect(
     () => {
@@ -12,8 +22,9 @@ export default function Millionaire() {
       setConnection(connection)
 
       // initializes question generation
-      connection.on('question_generated', (question: []) => {
+      connection.on('question_generated', (question: Question) => {
         setQuestion(question)
+        console.log(question)
       })
     },
     []
@@ -26,6 +37,8 @@ export default function Millionaire() {
     connection!.emit('generate_question')
   }
 
+  // TODO: helper function to randomize answers that is called on 'get a question'
+
   return (
     <>
       <div>
@@ -33,7 +46,14 @@ export default function Millionaire() {
           <button onClick={() => handleGenerateQuestion()}>Get a question!</button>
         </div>
         <div className="d-flex flew-row justify-content-center pt-4 pb-1">
-          {question}
+          {question?.prompt}
+        </div>
+        <div>
+          {question?.answers?.map((answer) => 
+            <div key={answer.text}>
+              {answer.text}
+            </div>
+          )}
         </div>
       </div>
     </>
