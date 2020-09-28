@@ -1,3 +1,6 @@
 {
-  "name": "minigame_collection"
+  "name": "minigame_collection",
+  "scripts": {
+    "postinstall": "npm run init --prefix server"
+  }
 }
