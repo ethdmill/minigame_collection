@@ -80,17 +80,20 @@ export default function Game () {
   const handleGenerateList = () => { 
     connection!.emit('generate_list')
     setDisableStartButton(false)
+    setAnswers(initialValues)
   }
 
   // on button click -- sets time remaining, starts timer, enables inputs, disables start/list/letter buttons
   const handleStart = () => {
     connection!.emit('generate_letter')
+    // these two lines are used for building/testing purposes and are switched out for deployment
     setTimeRemaining(5)
     countdownTimer(5)
+    // setTimeRemaining(180)
+    // countdownTimer(180)
     setDisableInputs(false)
     setDisableStartButton(true)
     setDisableGenerateButton(true)
-    setAnswers(initialValues)
   }
 
   // keeps track of checkboxes
