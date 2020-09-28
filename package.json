@@ -1,7 +1,6 @@
 {
-  "name": "scattergories-ethdmill",
-  "version": "0.1.0",
+  "name": "minigame_collection",
   "scripts": {
-    "postinstall": "npm install --prefix server && npm install --prefix main"
+    "postinstall": "npm run init --prefix server"
   }
 }

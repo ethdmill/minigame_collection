@@ -6,12 +6,15 @@ import generateList from './game_functions/scattergories/generateList';
 import Timer from './game_functions/scattergories/timer';
 import generateLetter from './game_functions/scattergories/randomLetter';
 import generateWord from './game_functions/hangman/generateWord'
-import generateQuestion from './game_functions/millionaire/generateQuestion'
+import generateQuestion from './game_functions/millionaire/generateQuestion';
+import pagesRouter from './pages';
 
 const expressServer = express();
 
 // @ts-ignore
-expressServer.use(express.static('../main/public'));
+expressServer.use(express.static('../main/build'));
+
+expressServer.use(pagesRouter);
 
 // @ts-ignore
 expressServer.get('/hello', (req, res) => {

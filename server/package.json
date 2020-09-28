@@ -2,6 +2,7 @@
     "name": "scattergories-server",
     "version": "0.1.0",
     "scripts": {
+        "init": "npm install",
         "start": "ts-node ./index.ts",
         "start-local": "ts-node-dev ./index.ts"
     },
